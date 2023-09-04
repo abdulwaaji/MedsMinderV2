@@ -1,5 +1,6 @@
 package com.waajid.medsminder.model
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -16,6 +17,6 @@ interface MedDao {
     fun delete(med: Med)
 
     @Query("SELECT * FROM table_meds")
-    fun getAllMeds() : List<Med>
+    fun getAllMeds() : LiveData<List<Med>>
 
 }

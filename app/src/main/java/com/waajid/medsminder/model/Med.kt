@@ -8,7 +8,7 @@ import com.waajid.medsminder.TypeConverters.ScheduleTypeConverter
 @Entity(tableName = "table_meds")
 @TypeConverters(ScheduleTypeConverter::class)
 data class Med(
-    @PrimaryKey(autoGenerate = true) var id: Int,
+    @PrimaryKey(autoGenerate = true) var id: Int?= null,
     var drugName: String,
     var ailment: String,
     var conSummingQuantity: Double,

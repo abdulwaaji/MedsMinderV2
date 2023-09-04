@@ -1,5 +1,6 @@
 package com.waajid.medsminder.model
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.waajid.medsminder.database.MedRepository
@@ -18,4 +19,6 @@ class MedViewModel @Inject constructor(
             medRepository.insertMedtoDb(med)
         }
     }
+
+    fun getAllData():LiveData<List<Med>> = medRepository.getAllMeds()
 }

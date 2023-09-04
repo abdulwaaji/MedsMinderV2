@@ -1,5 +1,6 @@
 package com.waajid.medsminder.database
 
+import androidx.lifecycle.LiveData
 import com.waajid.medsminder.model.Med
 import com.waajid.medsminder.model.MedDao
 import kotlinx.coroutines.Dispatchers
@@ -14,5 +15,9 @@ class MedRepository @Inject constructor(
         withContext(Dispatchers.IO){
             medDao.insert(med)
         }
+    }
+
+     fun getAllMeds(): LiveData<List<Med>>{
+       return medDao.getAllMeds()
     }
 }
