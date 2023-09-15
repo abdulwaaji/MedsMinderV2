@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import com.waajid.medsminder.model.Med
 import com.waajid.medsminder.model.MedViewModel
+import com.waajid.medsminder.ui.navGraph
 import com.waajid.medsminder.ui.theme.MedsMinderTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,32 +47,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MedsMinderTheme {
-                // A surface container using the 'background' color from the theme
-                Scaffold(
-                    floatingActionButton = {
-                        FloatingActionButton(
-                            onClick = { addMed()},
-                            modifier = Modifier
-                                .padding(16.dp),
-                            contentColor = Color.White,
-                            containerColor = Color.Black, // Customize FAB background color
-                            elevation = FloatingActionButtonDefaults.elevation(8.dp),
-                        ) {
-                            Icon(imageVector = Icons.Default.Add, contentDescription = null)
-                        }
-                    },
-                    modifier = Modifier.fillMaxSize(), // This modifier should be here
-                    contentColor = MaterialTheme.colorScheme.background
-                ) { innerPadding ->
-                    Column(
-                        modifier = Modifier
-                            .padding(innerPadding),
-                        verticalArrangement = Arrangement.spacedBy(16.dp),
-                    ) {
-                        Greeting("Android")
-                    }
-
-                }
+             navGraph()
             }
 
         }
