@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.waajid.medsminder.ui
 
 import androidx.compose.foundation.layout.Column
@@ -10,6 +12,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -63,6 +66,11 @@ fun AddMedsScreen() {
             value = availableStock,
             onValueChange = { availableStock = it })
 
+
+        val unit: MutableState<String> = remember {mutableStateOf("")}
+        val uomList = listOf("Mg", "G", "KG")
+        DropDown(listItems = uomList , selectedItem = unit)
+
         Spacer(modifier = Modifier.size(16.dp))
 
         Button(onClick = {
@@ -71,7 +79,7 @@ fun AddMedsScreen() {
                 drugName = medName.text,
                 ailment = ailmentName.text,
                 conSummingQuantity = intakeQty.text.toDouble(),
-                drugUOM = "Tablet",
+                drugUOM = unit.value,
                 drugColorId = "Blue",
                 schedule = listOf("Every 4 hours"),
                 beforeAfterFood = "After food",
