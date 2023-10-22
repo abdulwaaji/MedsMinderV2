@@ -12,20 +12,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropDown(listItems : List<String>,  selectedItem: MutableState<String>) {
+fun DropDown(listItems: List<String>, selectedItem: MutableState<String>) {
 
 
     // state of the menu
     var expanded by remember { mutableStateOf(false) }
 
-    // remember the selected item
-//    var selectedItem by remember { mutableStateOf(listItems[0]) }
-
-    // box
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = {
@@ -33,6 +29,7 @@ fun DropDown(listItems : List<String>,  selectedItem: MutableState<String>) {
         }
     ) {
         TextField(
+
             value = selectedItem.value,
             onValueChange = { selectedItem.value = it },
             label = { Text(text = "Unit") },
@@ -41,40 +38,28 @@ fun DropDown(listItems : List<String>,  selectedItem: MutableState<String>) {
                     expanded = expanded
                 )
             },
-            colors = ExposedDropdownMenuDefaults.textFieldColors()
+            colors = ExposedDropdownMenuDefaults.textFieldColors(),
+            readOnly = true,
+            modifier = Modifier.menuAnchor()
+
         )
-
-        // filter options based on text field value
-        val filteringOptions = listItems.filter { it.contains(selectedItem.value, ignoreCase = true) }
-
-        if (filteringOptions.isNotEmpty()) {
-            // menu
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                // this is a column scope
-                // all the items are added vertically
-                filteringOptions.forEach { selectionOption ->
-                    // menu item
-                    DropdownMenuItem(
-                        text = {},
-                        onClick = {
-                            selectedItem.value = selectionOption
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = {
+                expanded = false
+            }
+        ) {
+            listItems.forEach { selectionOption ->
+                // menu item
+                DropdownMenuItem(
+                    text = { Text(text = selectionOption) },
+                    onClick = {
+                        selectedItem.value = selectionOption
 //                            Toast.makeText(contextForToast, selectedItem, Toast.LENGTH_SHORT).show()
-                            expanded = false
-                        }
-                    )
-                }
+                        expanded = false
+                    }
+                )
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun DropDownPreviewn() {
-    val unit: MutableState<String> = remember {mutableStateOf("")}
-    val names = listOf("Alice", "Bob", "Carol")
-    DropDown(listItems = names , selectedItem = unit)
 }

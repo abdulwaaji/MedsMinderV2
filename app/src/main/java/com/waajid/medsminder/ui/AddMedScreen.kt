@@ -29,13 +29,12 @@ import com.waajid.medsminder.model.Med
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddMedsScreen() {
-    Column(modifier = Modifier.
-                        fillMaxWidth().
-                        padding(16.dp),
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
 
     ) {
-
 
         val medViewModel: MedViewModel = hiltViewModel()
         var medName by remember { mutableStateOf(TextFieldValue("")) }
@@ -68,7 +67,7 @@ fun AddMedsScreen() {
 
 
         val unit: MutableState<String> = remember {mutableStateOf("")}
-        val uomList = listOf("Mg", "G", "KG")
+        val uomList = listOf("Mg", "G", "µg", "mL")
         DropDown(listItems = uomList , selectedItem = unit)
 
         Spacer(modifier = Modifier.size(16.dp))
