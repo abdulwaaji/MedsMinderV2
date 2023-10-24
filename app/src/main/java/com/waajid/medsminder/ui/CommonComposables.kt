@@ -16,13 +16,14 @@ import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropDown(listItems: List<String>, selectedItem: MutableState<String>) {
+fun DropDown(modifier: Modifier,listItems: List<String>, selectedItem: MutableState<String>) {
 
 
     // state of the menu
     var expanded by remember { mutableStateOf(false) }
 
     ExposedDropdownMenuBox(
+        modifier = modifier,
         expanded = expanded,
         onExpandedChange = {
             expanded = !expanded
